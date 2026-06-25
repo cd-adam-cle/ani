@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <rect width="200" height="200" rx="40" fill="#fcf8f1" />
+  
+  <g transform="translate(0, 5)">
+    <!-- Plate -->
+    <path d="M34 161 Q100 175 166 161" fill="none" stroke="#2a2326" stroke-width="12" stroke-linecap="round"/>
+    
+    <!-- Cake Body -->
+    <path d="M49 100 L49 150 Q49 159 58 159 L142 159 Q151 159 151 150 L151 100 Z" fill="#eec76d" stroke="#2a2326" stroke-width="6" stroke-linejoin="round"/>
+    
+    <!-- Soft Layer Band -->
+    <path d="M49 126 Q100 134 151 126" fill="none" stroke="#b24c63" stroke-width="8"/>
+    
+    <!-- Top Frosting Base (drawn behind the scallops) -->
+    <path d="M45 100 Q101 75 157 100 Z" fill="#b24c63" stroke="#2a2326" stroke-width="6" stroke-linejoin="round"/>
+
+    <!-- Scalloped Frosting Lip -->
+    <path d="M45 100 q7 -13 14 0 q7 -13 14 0 q7 -13 14 0 q7 -13 14 0 q7 -13 14 0 q7 -13 14 0 q7 -13 14 0 q7 -13 14 0 Z" fill="#ff858d" stroke="#2a2326" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>
