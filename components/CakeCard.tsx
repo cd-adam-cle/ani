@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useLang } from "@/lib/LangContext";
 
 /**
@@ -14,16 +15,21 @@ export default function CakeCard({
   note,
   whole,
   inside,
+  href,
 }: {
   name: string;
   note: string;
   whole: string;
   inside: string;
+  href?: string;
 }) {
   const { lang } = useLang();
 
+  const Wrapper = href ? Link : "div";
+
   return (
-    <figure className="group">
+    <Wrapper href={href as string} className="group block outline-none">
+      <figure>
       <div
         tabIndex={0}
         className="relative aspect-[4/3] w-full overflow-hidden rounded-[1.6rem] bg-[radial-gradient(circle_at_50%_42%,#f7efe1,#efe3cf)] ring-1 ring-black/5"
@@ -49,6 +55,7 @@ export default function CakeCard({
         <p className="font-display text-lg leading-tight text-ink">{name}</p>
         <p className="mt-1 text-sm leading-snug text-ink/65">{note}</p>
       </figcaption>
-    </figure>
+      </figure>
+    </Wrapper>
   );
 }

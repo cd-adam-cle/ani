@@ -34,7 +34,7 @@ export const dict: Record<Lang, Dict> = {
   cs: {
     nav: { order: "Objednat" },
     hero: {
-      eyebrow: "20 let zkušeností",
+      eyebrow: "10 let zkušeností",
       title: "Domácí cukrářství",
       titleAccent: "",
       subtitle: "",
@@ -52,12 +52,12 @@ export const dict: Record<Lang, Dict> = {
       galleryTitle: "Co Anička upekla",
       storyTitle: "Peču od svých třinácti",
       storyBody:
-        "Anička peče přes dvacet let, od domácích koláčů až po vícepatrové dorty na zakázku. Každý dort je originál: žádné šablony, jen tvoje představa a její řemeslo.",
+        "Anička peče přes deset let, od domácích koláčů až po vícepatrové dorty na zakázku. Každý dort je originál: žádné šablony, jen tvoje představa a její řemeslo.",
       ctaBandTitle: "Máš v hlavě dort?",
       ctaBandBody: "Pojď si ho složit nebo napiš a vymyslíme ho spolu.",
     },
     footer: {
-      tagline: "Domácí dorty, zákusky a koláče na míru.",
+      tagline: "Domácí dorty, zákusky a frgály na míru.",
       madeWith: "Pečeno s láskou",
     },
   },
@@ -65,7 +65,7 @@ export const dict: Record<Lang, Dict> = {
   en: {
     nav: { order: "Order" },
     hero: {
-      eyebrow: "20 years of craft",
+      eyebrow: "10 years of craft",
       title: "Homemade Patisserie",
       titleAccent: "",
       subtitle: "",
@@ -83,7 +83,7 @@ export const dict: Record<Lang, Dict> = {
       galleryTitle: "What Anička baked",
       storyTitle: "Baking since I was thirteen",
       storyBody:
-        "Anička has been baking for over twenty years, from homemade pastries to multi-tier custom cakes. Every cake is one of a kind: no templates, just your idea and her craft.",
+        "Anička has been baking for over ten years, from homemade pastries to multi-tier custom cakes. Every cake is one of a kind: no templates, just your idea and her craft.",
       ctaBandTitle: "Got a cake in mind?",
       ctaBandBody: "Come build it, or write us and we'll figure it out together.",
     },

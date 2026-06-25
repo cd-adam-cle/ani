@@ -6,6 +6,7 @@ import { WishlistProvider } from "@/lib/WishlistContext";
 import GlowBackground from "@/components/ui/glow-background";
 import PageLoader from "@/components/effects/PageLoader";
 import ClickSplash from "@/components/effects/ClickSplash";
+import ScrollReveal from "@/components/ScrollReveal";
 
 // Heavy, rounded display face with full Latin-Extended coverage, so Czech
 // diacritics (ž, ů, ř, č, ě, š …) render in the brand font instead of falling
@@ -27,7 +28,7 @@ const hindSiliguri = Hind_Siliguri({
 export const metadata: Metadata = {
   title: "Anička · Dorty, zákusky a koláče na míru",
   description:
-    "Domácí cukrářství s dvacetiletou praxí. Slož si vlastní dort, korpus, krém, náplň i ozdoba. Narozeninové, svatební a sváteční dorty, zákusky a koláče.",
+    "Domácí cukrářství s desetiletou praxí. Slož si vlastní dort, korpus, krém, náplň i ozdoba. Narozeninové, svatební a sváteční dorty, zákusky a koláče.",
 };
 
 export default function RootLayout({
@@ -46,6 +47,7 @@ export default function RootLayout({
         <GlowBackground />
         <PageLoader />
         <ClickSplash />
+        <ScrollReveal />
         <LangProvider>
           <WishlistProvider>{children}</WishlistProvider>
         </LangProvider>

@@ -1,7 +1,8 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, Suspense, useEffect } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { AnimatePresence, motion, useReducedMotion, cubicBezier } from "framer-motion";
 import {
   ArrowLeft,
@@ -26,11 +27,21 @@ const STEPS = [
 ];
 
 export default function SlozSiDort() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-cream" />}>
+      <SlozSiDortForm />
+    </Suspense>
+  );
+}
+
+function SlozSiDortForm() {
   const { lang } = useLang();
   const reduce = useReducedMotion();
+  const searchParams = useSearchParams();
   const { selected, toggle, choose, has } = useWishlist();
 
-  const [step, setStep] = useState(0);
+  const initialStep = parseInt(searchParams.get("step") || "0", 10);
+  const [step, setStep] = useState(initialStep);
   const [dir, setDir] = useState(1);
   const [date, setDate] = useState("");
   const [vision, setVision] = useState("");
@@ -370,7 +381,7 @@ export default function SlozSiDort() {
 
       <form onSubmit={handleSubmit} className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_300px]">
         {/* Step body */}
-        <div className="min-h-[24rem]">
+        <div className="min-h-[24rem] overflow-x-hidden">
           <AnimatePresence mode="wait" custom={dir}>
             <motion.div
               key={step}

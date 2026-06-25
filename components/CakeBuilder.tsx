@@ -52,7 +52,7 @@ export default function CakeBuilder() {
   });
 
   return (
-    <section id="konfigurator" ref={containerRef} className="relative bg-cream pt-16 pb-24 sm:pt-20 sm:pb-32 overflow-hidden">
+    <section id="konfigurator" ref={containerRef} className="relative bg-gradient-to-b from-cream via-teal/8 to-cream pt-16 pb-24 sm:pt-20 sm:pb-32 overflow-hidden">
       
       {/* Background SVG Animation */}
       <div className="absolute inset-0 z-0 opacity-20 md:opacity-40 pointer-events-none flex justify-center">
@@ -69,7 +69,7 @@ export default function CakeBuilder() {
           <AnimatedHeading
             wrapperClassName="mt-3"
             className="text-4xl sm:text-5xl"
-            text={lang === "cs" ? "Je to celé na tobě." : "It's all up to you."}
+            text={lang === "cs" ? "Jak funguje skládání originálu" : "How building an original works"}
           />
           <p className="mt-4 text-[17px] leading-relaxed text-ink/75">
             {lang === "cs"

@@ -4,6 +4,7 @@ export type CakePreset = {
   image: string;
   description: string;
   presetConfig: string[]; // array of keys like "sponge:chocolate", "finish:ganachedrip"
+  occasions: string[];
 };
 
 export const cakesData: CakePreset[] = [
@@ -18,6 +19,7 @@ export const cakesData: CakePreset[] = [
       "addins:raspberry",
       "finish:ganachedrip",
     ],
+    occasions: ["narozeniny", "oslava", "vyroci"],
   },
   {
     id: "berry",
@@ -31,6 +33,7 @@ export const cakesData: CakePreset[] = [
       "finish:naked",
       "decoration:fruittop",
     ],
+    occasions: ["narozeniny", "oslava", "svatba"],
   },
   {
     id: "forest",
@@ -44,6 +47,7 @@ export const cakesData: CakePreset[] = [
       "finish:naked",
       "decoration:forest",
     ],
+    occasions: ["narozeniny", "svatba", "oslava"],
   },
   {
     id: "redvelvet",
@@ -57,6 +61,7 @@ export const cakesData: CakePreset[] = [
       "finish:naked",
       "decoration:fruittop",
     ],
+    occasions: ["narozeniny", "vyroci", "svatba"],
   },
   {
     id: "cheesecake",
@@ -70,5 +75,77 @@ export const cakesData: CakePreset[] = [
       "finish:naked",
       "decoration:freshflowers",
     ],
+    occasions: ["oslava", "narozeniny", "firemni"],
+  },
+  {
+    id: "birthday",
+    name: "Narozeninový",
+    image: "/photos/cakes/06-birthday-exterior.webp",
+    description: "Veselý narozeninový dort s duhovými vrstvami uvnitř a hromadou barevných sprinkles navrch.",
+    presetConfig: [
+      "sponge:vanilla",
+      "cream:mascarpone",
+      "addins:forestberries",
+      "finish:buttercream",
+      "decoration:sprinkles",
+    ],
+    occasions: ["narozeniny", "oslava"],
+  },
+  {
+    id: "wedding",
+    name: "Svatební",
+    image: "/photos/cakes/07-wedding-exterior.webp",
+    description: "Elegantní dvoupatrový svatební dort. Čistě bílý design zdobený čerstvými květinami.",
+    presetConfig: [
+      "size:tiered",
+      "sponge:vanilla",
+      "cream:mascarpone",
+      "addins:raspberry",
+      "finish:fondant",
+      "decoration:freshflowers",
+    ],
+    occasions: ["svatba"],
+  },
+  {
+    id: "ferrero",
+    name: "Oříškový Ferrero",
+    image: "/photos/cakes/08-ferrero-exterior.webp",
+    description: "Pro milovníky oříšků. Oříškový korpus, lahodný nugátový krém a spousta křupavých lískových ořechů.",
+    presetConfig: [
+      "sponge:hazelnut",
+      "cream:nougat",
+      "addins:nuts",
+      "finish:ganachedrip",
+      "decoration:marzipan",
+    ],
+    occasions: ["narozeniny", "oslava", "vyroci"],
+  },
+  {
+    id: "lemon",
+    name: "Citronový",
+    image: "/photos/cakes/09-lemon-exterior.webp",
+    description: "Lehký, svěží a jemně nakyslý citronový dort s hladkým máslovým krémem, ideální pro letní dny.",
+    presetConfig: [
+      "sponge:lemon",
+      "cream:mascarpone",
+      "addins:citrus",
+      "finish:buttercream",
+      "decoration:fruittop",
+    ],
+    occasions: ["oslava", "firemni"],
+  },
+  {
+    id: "oreo",
+    name: "Oreo Cookies & Cream",
+    image: "/photos/cakes/10-oreo-exterior.webp",
+    description: "Americká klasika s oblíbenými sušenkami Oreo, které jsou zašlehané přímo do lahodného smetanového krému.",
+    presetConfig: [
+      "sponge:chocolate",
+      "cream:mascarpone",
+      "addins:cookies",
+      "finish:buttercream",
+      "decoration:sprinkles",
+    ],
+    occasions: ["narozeniny", "oslava", "svatba"],
   },
 ];

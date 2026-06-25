@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ArrowLeft, ArrowRight, Quote } from "lucide-react";
 import { useLang } from "@/lib/LangContext";
@@ -79,41 +80,59 @@ export default function Testimonials() {
   const review = lang === "cs" ? tItem.reviewCs : tItem.reviewEn;
 
   return (
-    <section id="reference" className="bg-cream py-24 sm:py-28">
+    <section id="reference" className="bg-gradient-to-b from-teal/12 via-cream to-honey/10 py-24 sm:py-28">
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
-        <div className="reveal mb-14 text-center">
-          <span className="text-xs font-semibold uppercase tracking-[0.25em] text-rose">
+        <motion.div
+          className="mb-14 text-center"
+          initial={reduce ? false : { opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.25em] text-rose">
+            <span className="h-1.5 w-1.5 rounded-full bg-coral" />
             {lang === "cs" ? "Reference" : "Client stories"}
+            <span className="h-1.5 w-1.5 rounded-full bg-teal" />
           </span>
           <AnimatedHeading
             wrapperClassName="mt-3"
             className="text-4xl sm:text-5xl"
             text={lang === "cs" ? "Řekli, co chtějí. Dostali přesně to." : "They told us. They got exactly that."}
           />
-        </div>
+        </motion.div>
 
-        <div
-          className="reveal grid items-center gap-10 md:grid-cols-2 md:gap-14"
+        <motion.div
+          className="grid items-center gap-10 md:grid-cols-2 md:gap-14"
+          initial={reduce ? false : { opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.15 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
         >
           {/* Left: stacked cake cards */}
-          <div ref={stageRef} className="relative h-[20rem] sm:h-[24rem]" style={{ perspective: 1200 }}>
-            {testimonials.map((item, i) => (
-              <div
-                key={item.id}
-                style={cardStyle(i)}
-                className="absolute inset-0 overflow-hidden rounded-[1.8rem] bg-[radial-gradient(circle_at_50%_42%,#f7efe1,#efe3cf)] ring-1 ring-black/5 shadow-[0_30px_60px_-30px_rgba(42,35,38,0.45)]"
-              >
-                <Image
-                  src={item.image}
-                  alt={item.name}
-                  fill
-                  sizes="(max-width: 768px) 90vw, 460px"
-                  className="object-contain p-6"
-                />
-              </div>
-            ))}
+          <div className="flex w-full justify-center md:justify-end md:pr-10 lg:pr-16">
+            <div
+              ref={stageRef}
+              className="relative w-full max-w-[280px] sm:max-w-[320px] md:max-w-[340px] lg:max-w-[380px] h-[20rem] sm:h-[24rem]"
+              style={{ perspective: 1200 }}
+            >
+              {testimonials.map((item, i) => (
+                <div
+                  key={item.id}
+                  style={cardStyle(i)}
+                  className="absolute inset-0 overflow-hidden rounded-[1.8rem] bg-[radial-gradient(circle_at_50%_42%,#f7efe1,#efe3cf)] ring-1 ring-black/5 shadow-[0_30px_60px_-30px_rgba(42,35,38,0.45)]"
+                >
+                  <Image
+                    src={item.image}
+                    alt={item.name}
+                    fill
+                    sizes="(max-width: 768px) 90vw, 460px"
+                    className="object-contain p-6"
+                  />
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* Right: request + review */}
@@ -131,7 +150,7 @@ export default function Testimonials() {
                 </p>
 
                 {/* the original brief */}
-                <div className="mt-4 rounded-2xl border border-ink/10 bg-cream-deep/40 p-4">
+                <div className="mt-4 rounded-2xl border border-coral/30 bg-coral/5 p-4">
                   <p className="text-[11px] font-semibold uppercase tracking-wider text-ink/65">
                     {lang === "cs" ? "Co si přál(a)" : "What they asked for"}
                   </p>
@@ -196,6 +215,16 @@ export default function Testimonials() {
               </div>
             </div>
           </div>
+        </motion.div>
+
+        <div className="mt-12 text-center">
+          <Link
+            href="/recenze"
+            className="group inline-flex items-center gap-2 rounded-full bg-[#4BB5B2] px-8 py-4 text-base font-bold text-cream shadow-[0_12px_24px_-10px_rgba(75,181,178,0.7)] transition-all duration-300 hover:-translate-y-1 hover:brightness-105"
+          >
+            {lang === "cs" ? "Všechny recenze" : "All reviews"}
+            <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+          </Link>
         </div>
       </div>
     </section>

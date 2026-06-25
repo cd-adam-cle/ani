@@ -14,29 +14,57 @@ import CakeLoader from "./CakeLoader";
 export default function PageLoader() {
   const reduce = useReducedMotion();
   const [visible, setVisible] = useState(true);
+  const [drawDone, setDrawDone] = useState(false); // cake finished drawing
+  const [pageReady, setPageReady] = useState(false); // window load + min floor
 
   useEffect(() => {
-    const minHold = reduce ? 350 : 1300;
-    const start = performance.now();
+    if (process.env.NEXT_PUBLIC_NO_CURTAIN) {
+      setVisible(false);
+      return;
+    }
 
-    const finish = () => {
-      const elapsed = performance.now() - start;
-      const wait = Math.max(0, minHold - elapsed);
-      window.setTimeout(() => setVisible(false), wait);
+    // Set pageReady when page load finishes
+    const allow = () => {
+      setPageReady(true);
     };
 
     if (document.readyState === "complete") {
-      finish();
+      allow();
     } else {
-      window.addEventListener("load", finish, { once: true });
-      // Safety net: never trap the user behind the curtain.
-      const hardStop = window.setTimeout(() => setVisible(false), 4500);
-      return () => {
-        window.removeEventListener("load", finish);
-        window.clearTimeout(hardStop);
-      };
+      window.addEventListener("load", allow, { once: true });
     }
+
+    // Start a timer for the cake drawing animation duration.
+    // CakeLoader total animation duration: 5 * 0.08s (delay) + 0.75s (duration) = 1.15s.
+    const animDuration = reduce ? 0 : 1150;
+    const animTimer = window.setTimeout(() => {
+      setDrawDone(true);
+    }, animDuration);
+
+    // Hard safety: never trap the user behind the curtain
+    const hardStop = window.setTimeout(() => {
+      setDrawDone(true);
+      setPageReady(true);
+    }, 6000);
+
+    return () => {
+      window.removeEventListener("load", allow);
+      window.clearTimeout(animTimer);
+      window.clearTimeout(hardStop);
+    };
   }, [reduce]);
+
+  // Lift the curtain only once the cake has fully drawn AND the page is ready,
+  // plus a small pause so the finished cake actually sits on screen for a moment.
+  useEffect(() => {
+    if (drawDone && pageReady) {
+      const holdTime = reduce ? 100 : 700;
+      const timer = window.setTimeout(() => {
+        setVisible(false);
+      }, holdTime);
+      return () => window.clearTimeout(timer);
+    }
+  }, [drawDone, pageReady, reduce]);
 
   // Lock scroll while the curtain is up.
   useEffect(() => {
@@ -59,7 +87,7 @@ export default function PageLoader() {
               : { y: "-100%", transition: { duration: 0.8, ease: cubicBezier(0.76, 0, 0.24, 1) } }
           }
         >
-          <CakeLoader size={104} />
+          <CakeLoader size={104} onComplete={() => setDrawDone(true)} />
           <motion.p
             className="mt-6 font-display text-sm tracking-[0.3em] text-rose/80 uppercase"
             initial={{ opacity: 0 }}
