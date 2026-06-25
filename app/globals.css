@@ -1,0 +1,135 @@
+@import "tailwindcss";
+
+/*
+  Anička dorty, design tokens
+  Brand palette from spec:
+    #9AC2C5  teal     (calm, mátová)
+    #EEC76D  honey    (zlatá, teplá)
+    #FF858D  coral    (růžová akcent)
+    #B24C63  rose     (tmavá růžová, hlavní akcent / CTA)
+  Backbone goal: clean, airy, premium-bakery feel.
+*/
+
+@theme {
+  --color-cream: #fcf8f1;
+  --color-cream-deep: #f5ecdd;
+  --color-ink: #2a2326;
+
+  --color-teal: #9ac2c5;
+  --color-honey: #eec76d;
+  --color-coral: #ff858d;
+  --color-rose: #b24c63;
+  --color-rose-deep: #8f3a4e;
+
+  --font-display: var(--font-display), "Trebuchet MS", ui-rounded, system-ui, sans-serif;
+  --font-body: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* shadcn tokens (used by components/ui/*), mapped to the brand palette */
+  --color-background: var(--color-cream);
+  --color-foreground: var(--color-ink);
+  --color-popover: #ffffff;
+  --color-popover-foreground: var(--color-ink);
+  --color-accent: color-mix(in srgb, var(--color-rose) 12%, white);
+  --color-accent-foreground: var(--color-rose-deep);
+  --color-border: rgba(42, 35, 38, 0.12);
+  --color-ring: var(--color-rose);
+  --color-muted: var(--color-cream-deep);
+  --color-muted-foreground: rgba(42, 35, 38, 0.6);
+}
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  /* transparent so the fixed GlowBackground (z-10 behind) shows through */
+  background-color: transparent;
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Display serif via Google Fonts loaded in layout */
+.font-display {
+  font-family: var(--font-display);
+  /* Baloo 2 is loaded at 600/700/800; default display text to the heavy 800 so
+     headings keep the chunky bakery punch (no weight utility on these elements). */
+  font-weight: 800;
+  font-optical-sizing: auto;
+}
+
+/* Scroll-reveal: elements start hidden+shifted, then animate in when
+   .is-visible is added by the IntersectionObserver in ScrollReveal. */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.8s var(--ease-soft),
+    transform 0.8s var(--ease-soft);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Fade-in for state changes (form submitted, panels appearing). Motivated:
+   confirms something just changed. */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.animate-fade-in {
+  animation: fade-in 0.5s var(--ease-soft) both;
+}
+
+/* Flyout panel open, the option drawer growing out of its trigger. Motivated:
+   shows the panel belongs to the tile it sprang from. */
+@keyframes flyout-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.animate-flyout {
+  transform-origin: top center;
+  animation: flyout-in 0.22s var(--ease-soft) both;
+}
+
+/* Consistent, brand-tinted focus ring for keyboard users across all controls.
+   (No border-radius here, it must not reshape pill buttons on focus.) */
+:where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-rose);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .animate-fade-in,
+  .animate-flyout {
+    animation: none;
+  }
+}
